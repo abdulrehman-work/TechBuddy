@@ -104,7 +104,7 @@ After setup:
 ```bash
 ./gradlew :app:assembleDebug          # Windows: gradlew.bat :app:assembleDebug
 adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n org.anagentforelders.app/.MainActivity
+adb shell am start -n org.seniorconnect.app/.MainActivity
 ```
 
 The debug APK will be created at

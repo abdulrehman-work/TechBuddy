@@ -55,7 +55,7 @@ Enable **Developer Options → USB debugging** on any Android phone (Android 6+)
 ./gradlew :app:assembleDebug          # Windows: gradlew.bat :app:assembleDebug
 emulator -avd senior &                # skip when using a phone
 adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n org.anagentforelders.app/.MainActivity
+adb shell am start -n org.seniorconnect.app/.MainActivity
 ```
 
 You should see "What would you like to do?" with four large buttons. They have no behavior yet by design.

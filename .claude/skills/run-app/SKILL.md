@@ -39,7 +39,7 @@ adb shell 'while [ "$(getprop sys.boot_completed)" != "1" ]; do sleep 2; done'
 
 ```bash
 adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n org.anagentforelders.app/.MainActivity
+adb shell am start -n org.seniorconnect.app/.MainActivity
 ```
 
 ## Verify / debug

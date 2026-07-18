@@ -6,4 +6,9 @@
     <string name="action_youtube">YOUTUBE</string>
     <string name="action_speak">SPEAK</string>
     <string name="action_map">MAP</string>
+    <string name="yt_ad_notice">An ad may be playing. Please wait.</string>
+    <string name="yt_unavailable">Videos are not available right now.</string>
+    <string name="yt_home">HOME</string>
+    <string name="yt_next">NEXT</string>
+    <string name="yt_stop">STOP</string>
 </resources>

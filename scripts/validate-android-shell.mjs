@@ -47,12 +47,39 @@ for (const [id, stringName, label] of expected) {
   }
 }
 
-if (manifest.includes("<uses-permission")) {
-  throw new Error("The UI-only prototype must not request Android permissions.");
+// Phase: limited Android integration. INTERNET is allowed only for the
+// TV-style YouTube screen; no other permission may appear.
+const permissions = manifest.match(/<uses-permission[^>]*android:name="([^"]+)"/g) ?? [];
+const allowedPermissions = new Set(["android.permission.INTERNET"]);
+for (const entry of permissions) {
+  const name = entry.match(/android:name="([^"]+)"/)[1];
+  if (!allowedPermissions.has(name)) {
+    throw new Error(`Permission ${name} is not allowed in this phase.`);
+  }
 }
 
-if (layout.includes("android:onClick") || activity.includes("setOnClickListener")) {
-  throw new Error("The four buttons must remain behavior-free in this phase.");
+// The home screen may wire exactly one handler: YouTube. Call, Speak, and
+// Map must remain behavior-free.
+if (layout.includes("android:onClick")) {
+  throw new Error("Wire handlers in code, not with android:onClick in the layout.");
+}
+const handlerCount = (activity.match(/setOnClickListener/g) ?? []).length;
+if (handlerCount !== 1 || !activity.includes("R.id.action_youtube")) {
+  throw new Error(
+    "MainActivity must wire exactly one handler, on action_youtube; Call, Speak, and Map stay behavior-free.",
+  );
+}
+for (const forbidden of ["action_call", "action_speak", "action_map"]) {
+  if (activity.includes(`R.id.${forbidden}`)) {
+    throw new Error(`Button ${forbidden} must remain behavior-free in this phase.`);
+  }
 }
 
-console.log("Android shell lint OK: exactly 4 buttons, 0 permissions, 0 handlers.");
+// PiP must stay unavailable on the video screen.
+if (/android:supportsPictureInPicture\s*=\s*"true"/.test(manifest)) {
+  throw new Error("Picture-in-picture must not be enabled.");
+}
+
+console.log(
+  "Android shell lint OK: 4 buttons, INTERNET-only permissions, YouTube-only handler, no PiP.",
+);

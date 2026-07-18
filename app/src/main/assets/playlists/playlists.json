@@ -1,0 +1,36 @@
+{
+  "_note": "Reviewed per-country playlists for the TV-style YouTube screen. The IDs below are stable, embeddable PLACEHOLDER videos so the feature can be demonstrated; replace each country's list with reviewed elder-friendly channels (nature, music/trot, cooking, light exercise, faith/culture) before any real use. Every video must allow embedding.",
+  "default_country": "US",
+  "countries": {
+    "US": {
+      "label": "United States (English)",
+      "videos": [
+        { "id": "aqz-KE-bpKQ", "title": "Big Buck Bunny (Blender Foundation)" },
+        { "id": "jNQXAC9IVRw", "title": "Me at the zoo" },
+        { "id": "M7lc4UVf-mo", "title": "YouTube embed demo" }
+      ]
+    },
+    "KR": {
+      "label": "대한민국 (한국어)",
+      "videos": [
+        { "id": "aqz-KE-bpKQ", "title": "Big Buck Bunny (자리표시자)" },
+        { "id": "jNQXAC9IVRw", "title": "Me at the zoo (자리표시자)" },
+        { "id": "M7lc4UVf-mo", "title": "YouTube embed demo (자리표시자)" }
+      ]
+    },
+    "IN": {
+      "label": "India (Hindi) — placeholder list",
+      "videos": [
+        { "id": "aqz-KE-bpKQ", "title": "Big Buck Bunny (placeholder)" },
+        { "id": "M7lc4UVf-mo", "title": "YouTube embed demo (placeholder)" }
+      ]
+    },
+    "PK": {
+      "label": "Pakistan (Urdu) — placeholder list",
+      "videos": [
+        { "id": "aqz-KE-bpKQ", "title": "Big Buck Bunny (placeholder)" },
+        { "id": "jNQXAC9IVRw", "title": "Me at the zoo (placeholder)" }
+      ]
+    }
+  }
+}
