@@ -4,16 +4,42 @@ These instructions apply to the entire repository.
 
 ## Current phase
 
-This is now an **Android UI prototype repository**. The team explicitly moved
-from planning-only work to a native Android shell on 2026-07-18.
+This is now a **limited Android integration repository**. The team explicitly
+moved from planning-only work to a native Android shell on 2026-07-18, and on
+2026-07-18 explicitly expanded the phase to allow the first working feature:
+the **YouTube TV-style video screen** (`MVP`).
 
 The current implementation scope is intentionally narrow:
 
-- one Android activity;
-- exactly four primary buttons: Call, YouTube, Speak, and Camera;
-- no button behavior yet;
-- no Android permissions;
-- no network, agent, contact, microphone, camera, or external-app integration.
+- the four-button home activity (Call, YouTube, Speak, and Map);
+- the YouTube button opens an in-app, full-screen, TV-style video screen
+  backed by the official YouTube embedded player in a WebView;
+- the `INTERNET` permission is allowed **only** for that screen;
+- Call, Speak, and Map still have no behavior;
+- no agent, contact, microphone, camera, or location integration yet.
+
+### YouTube TV-mode rules (MVP)
+
+- Video plays full screen from entry, auto-plays, and auto-advances to the
+  next video when one ends. Picture-in-picture is not supported.
+- Playback uses a reviewed, per-country playlist bundled in the app
+  (`app/src/main/assets/playlists/`). The live YouTube recommendation
+  algorithm is `FUTURE`; arbitrary search is `FUTURE`.
+- A touch-protection layer swallows all touches on the video. The only
+  tappable controls are the app's own large Home, Next, and Stop buttons.
+- Ad handling: **never** block, remove, mute, or auto-skip an advertisement,
+  and never click anything on the user's behalf. The only allowed behaviors
+  are passive: keep the touch shield up and show a calm notice such as
+  "An ad is playing. Please wait." Install or purchase screens are handled
+  the same way — the user cannot tap them through the shield.
+- The WebView must not navigate anywhere except the embedded player: block
+  all page navigation, external links, `intent://` and app deep links, and
+  never launch the YouTube app or a browser.
+- Videos that refuse embedding (player errors 101/150) or fail to play are
+  skipped silently; if every video fails, show a simple "Videos are not
+  available right now" message.
+- The screen keeps no state: leaving destroys it, and re-entering starts a
+  fresh session with a fresh random video.
 
 Contributors may add Android UI code that stays inside this boundary, along
 with plans, contracts, synthetic fixtures, validation scripts, and project
